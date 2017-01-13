@@ -20,40 +20,40 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
-@EnableGlobalAuthentication // gor AuthenticationBuilder to work properly
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class DemoCode extends WebSecurityConfigurerAdapter{
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		        auth.authenticationProvider(new AuthenticationProvider() {
-		            
-		        	@Override
-		            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		                String email = (String) authentication.getPrincipal();
-		                String providedPassword = (String) authentication.getCredentials();
-		                
-		                User user = null;//userRepository.findUserByEmail(email);
-		                
-		                if (user == null || !passwordEncoder().matches(providedPassword, user.getPassword())) {
-		                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
-		                }
-		                
-		                return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
-		            }
-
-		            @Override
-		            public boolean supports(Class<?> authentication) {
-		                return true;
-		            }
-		        });
-	    }
-
-	   @Bean
-	    public PasswordEncoder passwordEncoder() {
-	        return new BCryptPasswordEncoder();
-	    }
-	
-}
+//@Configuration
+//@EnableWebSecurity
+//@EnableGlobalAuthentication // gor AuthenticationBuilder to work properly
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//public class DemoCode extends WebSecurityConfigurerAdapter{
+//
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		        auth.authenticationProvider(new AuthenticationProvider() {
+//		            
+//		        	@Override
+//		            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+//		                String email = (String) authentication.getPrincipal();
+//		                String providedPassword = (String) authentication.getCredentials();
+//		                
+//		                User user = null;//userRepository.findUserByEmail(email);
+//		                
+//		                if (user == null || !passwordEncoder().matches(providedPassword, user.getPassword())) {
+//		                    throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
+//		                }
+//		                
+//		                return new UsernamePasswordAuthenticationToken(email, providedPassword, Collections.singleton(new SimpleGrantedAuthority("USER")));
+//		            }
+//
+//		            @Override
+//		            public boolean supports(Class<?> authentication) {
+//		                return true;
+//		            }
+//		        });
+//	    }
+//
+//	   @Bean
+//	    public PasswordEncoder passwordEncoder() {
+//	        return new BCryptPasswordEncoder();
+//	    }
+//	
+//}
