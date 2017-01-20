@@ -12,4 +12,9 @@ public class TestController {
 		return "Page accessible!";
 	}
 	
+	@RequestMapping(value = "/haha")
+	private String smile() {
+		return ":D";
+	}
+	
 }

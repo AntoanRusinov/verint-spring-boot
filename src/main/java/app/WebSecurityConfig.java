@@ -15,21 +15,20 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalAuthentication // gor AuthenticationBuilder to work properly
+@EnableGlobalAuthentication // for AuthenticationBuilder to work properly
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	/*
 	 * login and logout functionalities are enabled by default
-	 * 
 	*/
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		http
-        	.authorizeRequests()
+		 	.authorizeRequests()
         	.antMatchers("/login").permitAll()
         	.antMatchers("/api/ping").permitAll()
-//        	.antMatchers("/api/**").permitAll()
+        	.antMatchers("/jms/**").permitAll()
         	.anyRequest().authenticated()
             .and()
             .formLogin().permitAll()
@@ -41,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		/*
 		Specify to allow any request that comes from the same origin to 
 		frame this application. For example, if the application was hosted
-		 on example.com, then example.com could frame the application, 
+		 on example.com, thenauth example.com could frame the application, 
 		 but evil.com could not frame the application.
 		*/
 		http
@@ -53,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         auth
             .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER").and()
-        		.withUser("admin").password("secret").roles("ADMIN").and();
+        		.withUser("admin").password("secret").roles("ADMIN");
+        
     }
 	
 	@Bean
