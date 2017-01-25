@@ -10,7 +10,7 @@ import app.messaging.JmsClient;
 
 @RestController
 @RequestMapping(value = "/jms", method = RequestMethod.GET)
-public class WebController {
+public class JmsController {
 
 	@Autowired
 	private JmsClient jsmClient;
@@ -18,11 +18,12 @@ public class WebController {
 	@RequestMapping(value = "/produce")
 	public String produce(@RequestParam("message") String message) {
 		jsmClient.send(message);
-		return "Send message: " + message;
+		return "Sent: " + message;
 	}
 
 	@RequestMapping(value = "/receive")
 	public String receive() {
 		return "Received: " + jsmClient.receive();
 	}
+
 }

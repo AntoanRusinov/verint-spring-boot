@@ -1,5 +1,6 @@
 package app;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.SpringApplication;
@@ -15,7 +16,11 @@ import org.springframework.jms.annotation.EnableJms;
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		
+		//run dockerized activeMQ instance to handle messages
+		Runtime.getRuntime().exec("docker run -p 61616:61616 -p 8161:8161 -t webcenter/activemq");
+		
 		SpringApplication.run(Application.class, args);
 	}
 

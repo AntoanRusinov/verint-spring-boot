@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
-public class TestController {
+public class ApiController {
 
 	@RequestMapping(value = "/ping")
 	private String ping() {
